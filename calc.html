@@ -1,0 +1,134 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+
+    <style>
+        fieldset {
+            width: 60%;
+            margin: 20px;
+        }
+    </style>
+
+   
+
+</head>
+
+<body>
+    <script>
+        function addToList( ){
+            var num=parseFloat(document.getElementById('number').value);
+            var result=[];
+            
+            if(window.result){
+                result=window.result
+            }
+            result.push(num);
+            window.result=result;
+            var li = document.createElement("li");
+            var t = document.createTextNode(num);
+            document.getElementById("numberList").appendChild(t)
+        }
+
+        function sum(){
+            var result=[];
+            var sum=0;
+            if(window.result){
+                result=window.result
+            }
+            for(var i=0;i<result.length;i++){
+                sum=sum+result[i];
+            }
+            document.getElementById('console').innerHTML=sum
+        }
+        function average(){
+            var result=[];
+            var sum=0;
+            if(window.result){
+                result=window.result
+            }
+            if(result.length<=0){
+                return
+            }
+            for(var i=0;i<result.length;i++){
+                sum=sum+result[i];
+            }
+            var average=sum/result.length;
+            document.getElementById('console').innerHTML=average
+        }
+        function min(){
+            var result=[];
+            var sum=0;
+            if(window.result){
+                result=window.result
+            }
+            if(result.length<=0){
+                return;
+            }
+            var min=result[0];
+            for(var i=0;i<result.length;i++){
+                if(min>result[i]){
+                    min=result[i];
+                }
+             
+            }
+            var average=sum/result.length;
+            document.getElementById('console').innerHTML=average
+        }
+        function clearDisplay(){
+            document.getElementById('numberList').clearDisplay;
+        }
+        function resetCalculator(){
+            window.result=[];
+        }
+    </script>
+    <fieldset>
+        <legend>Toolbar</legend>
+        <div>
+            Number
+            <input type='text' id='number' />
+            <input type='button' value='Add To List' onclick="addToList(number)"  />
+            <input type='button' value='Clear Display' onclick='clearDisplay()' />
+            <input type='button' value='Reset Calculator' onclick="resetCalculator()"   />
+
+            <br/>
+            <input type='button' value='Sum'  onclick="sum()" />
+            <input type='button' value='Average' onclick="average()" />
+            <input type='button' value='Find Min' onclick="min()"/>
+
+        </div>
+
+    </fieldset>
+
+    <hr/>
+
+    <fieldset>
+        <legend>Console</legend>
+
+        <div id='console'>
+
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Number List</legend>
+
+        <ul id='numberList'>
+
+        </ul>
+
+        <input type='button' value='refresh list'  />
+    </fieldset>
+
+
+   
+</body>
+
+</html>
