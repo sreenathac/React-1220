@@ -36,18 +36,7 @@
             document.getElementById("numberList").appendChild(t)
         }
 
-        function sum(){
-            var result=[];
-            var sum=0;
-            if(window.result){
-                result=window.result
-            }
-            for(var i=0;i<result.length;i++){
-                sum=sum+result[i];
-            }
-            document.getElementById('console').innerHTML=sum
-        }
-        function average(){
+        function sum(opt){
             var result=[];
             var sum=0;
             if(window.result){
@@ -56,36 +45,69 @@
             if(result.length<=0){
                 return
             }
-            for(var i=0;i<result.length;i++){
+            
+            switch(opt){
+                case'1':{
+                    for(var i=0;i<result.length;i++){
+                sum=sum+result[i];
+            }
+            document.getElementById('console').innerHTML=sum
+            break;
+                }
+                case '2':{
+                    for(var i=0;i<result.length;i++){
                 sum=sum+result[i];
             }
             var average=sum/result.length;
             document.getElementById('console').innerHTML=average
-        }
-        function min(){
-            var result=[];
-            var sum=0;
-            if(window.result){
-                result=window.result
-            }
-            if(result.length<=0){
-                return;
-            }
-            var min=result[0];
+            break;
+                }
+                case '3':{
+                    var min=result[0];
             for(var i=0;i<result.length;i++){
                 if(min>result[i]){
                     min=result[i];
                 }
              
             }
-            var average=sum/result.length;
-            document.getElementById('console').innerHTML=average
+         
+            document.getElementById('console').innerHTML=min
+            break
+                }
+                default:{
+                document.getElementById('console').innerHTML='invalid operation'   
+            }
+                
+            }
+            
+            
+           
+           
         }
+      
+        
         function clearDisplay(){
-            document.getElementById('numberList').clearDisplay;
+            document.getElementById('numberList').innerHTML='';
+            document.getElementById('console').innerHTML="";
         }
         function resetCalculator(){
+            document.getElementById('numberList').innerHTML='';
+            document.getElementById('console').innerHTML="";
             window.result=[];
+        }
+        function refreshList(){
+            var result=[];
+            
+            if(window.result){
+                result=window.result
+            }
+            for(var i=0;i<result.length;i++){
+                var li = document.createElement("li");
+            var t = document.createTextNode(result[i]);
+            document.getElementById("numberList").appendChild(t)
+            }
+          
+           
         }
     </script>
     <fieldset>
@@ -98,9 +120,9 @@
             <input type='button' value='Reset Calculator' onclick="resetCalculator()"   />
 
             <br/>
-            <input type='button' value='Sum'  onclick="sum()" />
-            <input type='button' value='Average' onclick="average()" />
-            <input type='button' value='Find Min' onclick="min()"/>
+            <input type='button' value='Sum'  onclick="sum('1')" />
+            <input type='button' value='Average' onclick="sum('2')" />
+            <input type='button' value='Find Min' onclick="sum('3')"/>
 
         </div>
 
@@ -124,7 +146,7 @@
 
         </ul>
 
-        <input type='button' value='refresh list'  />
+        <input type='button' value='refresh list' onclick="refreshList()"  />
     </fieldset>
 
 
